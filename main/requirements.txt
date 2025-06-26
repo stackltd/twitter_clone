@@ -1,0 +1,11 @@
+aiosqlite
+anyio
+asyncpg
+fastapi
+pydantic
+pydantic_core
+SQLAlchemy
+uvicorn
+loguru
+python-dotenv
+python-multipart
