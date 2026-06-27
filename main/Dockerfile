@@ -1,4 +1,4 @@
-FROM python:latest
+FROM python:3.12-slim
 
 RUN mkdir app
 
@@ -6,13 +6,14 @@ RUN mkdir app/main
 
 RUN mkdir app/main/images
 
-COPY . app/main/
-
 WORKDIR app/
 
-RUN python -m pip install --upgrade pip
+COPY requirements.txt ./main
 
-RUN python -m pip install -r ./main/requirements.txt
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r ./main/requirements.txt
+
+COPY . ./main/
 
 RUN chmod +x ./main/wait-for-it.sh
 

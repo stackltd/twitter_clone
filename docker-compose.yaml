@@ -7,6 +7,8 @@ services:
     container_name: fastapi_container
     ports:
       - "8000:8000"
+    env_file:
+      - .env
     networks:
       - app_network
     depends_on:
@@ -19,12 +21,14 @@ services:
     container_name: postgres_container
     volumes:
       - ./postgres_db/pgdata/:/var/lib/postgresql/data
+    env_file:
+      - .env
     environment:
       POSTGRES_USER: ${db_login}
       POSTGRES_PASSWORD: ${db_password}
       POSTGRES_DB: ${db_name}
     ports:
-      - '5432:5432'
+      - '${db_port}:5432'
     networks:
       - app_network
   nginx:
